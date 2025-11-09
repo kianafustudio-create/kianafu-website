@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIANAFU - The Symbiotic Economy</title>
+    <style>
+        /* CSS Variables for Brand Colors */
+        :root {
+            --primary: #1a237e; /* Deep indigo */
+            --secondary: #00bcd4; /* Cyan */
+            --accent: #ff9800; /* Amber */
+            --light-bg: #f5f7fa;
+            --dark-text: #212121;
+            --light-text: #ffffff;
+            --gray-text: #757575;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Satoshi', 'Inter', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark-text);
+        }
+
+        .btn-primary:hover {
+            background-color: #f57c00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--light-text);
+            border: 2px solid var(--light-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-disabled {
+            background-color: #e0e0e0;
+            color: #9e9e9e;
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #283593 100%);
+            color: var(--light-text);
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Problem Section */
+        .problem {
+            background-color: var(--light-bg);
+        }
+
+        .problem h2 {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .problem-card {
+            background: white;
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background-color: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .problem-card h3 {
+            margin-bottom: 15px;
+        }
+
+        /* Architecture Section */
+        .architecture h2 {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .architecture-stack {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stack-layer {
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stack-layer:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .layer-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .layer-content {
+            flex: 1;
+        }
+
+        .layer-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .layer-details {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .layer-details ul {
+            padding-left: 20px;
+        }
+
+        .layer-details li {
+            margin-bottom: 5px;
+        }
+
+        .stack-layer.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .stack-layer.active .layer-icon {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .stack-layer.active .layer-details {
+            display: block;
+        }
+
+        /* Use Case Section */
+        .use-case {
+            background-color: var(--light-bg);
+        }
+
+        .use-case h2 {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .use-case-card {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .use-case-profile {
+            flex: 0 0 200px;
+            background-color: var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            color: white;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .profile-img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 188, 212, 0.3);
+            color: white;
+            font-size: 3rem;
+        }
+
+        .use-case-content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .use-case-quote {
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .use-case-quote:before {
+            content: """;
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 4rem;
+            color: var(--secondary);
+            opacity: 0.3;
+        }
+
+        .use-case-cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Governance & Tokenomics Section */
+        .governance-tokenomics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .governance, .tokenomics {
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .governance {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .tokenomics {
+            background-color: var(--light-bg);
+        }
+
+        .governance h3, .tokenomics h3 {
+            margin-bottom: 20px;
+        }
+
+        .governance-icons, .tokenomics-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .governance-icon, .tokenomics-role {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .governance .icon-circle {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tokenomics .icon-circle {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .governance-cta, .tokenomics-cta {
+            margin-top: 30px;
+        }
+
+        /* Roadmap Section */
+        .roadmap {
+            background-color: var(--light-bg);
+        }
+
+        .roadmap h2 {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: var(--secondary);
+            z-index: 1;
+        }
+
+        .timeline-phase {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .phase-marker {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .phase-marker:hover, .phase-marker.active {
+            transform: scale(1.2);
+            background-color: var(--primary);
+        }
+
+        .phase-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+            display: none;
+        }
+
+        .phase-marker.active + .phase-content {
+            display: block;
+        }
+
+        .phase-content h4 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .phase-content ul {
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .phase-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, #283593 100%);
+            color: var(--light-text);
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .final-cta h2 {
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .final-cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .governance-tokenomics {
+                grid-template-columns: 1fr;
+            }
+            
+            .use-case-card {
+                flex-direction: column;
+            }
+            
+            .use-case-profile {
+                flex: 0 0 auto;
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            .hero {
+                padding: 100px 0;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .timeline:before {
+                display: none;
+            }
+            
+            .phase-content {
+                display: block;
+            }
+            
+            .stack-layer {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .layer-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background" id="neural-network-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>The Symbiotic Economy is Here.</h1>
+                <p>KIANAFU is the first Layer-1 blockchain where humans and AI collaborate as partners. Built on trust, transparency, and shared prosperity.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn btn-primary">Explore The Symbiotic Economy</a>
+                    <a href="#" class="btn btn-secondary">Read the Whitepaper (v1.0)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>The Future of Intelligence Shouldn't Be Centralized.</h2>
+            <div class="problem-cards">
+                <div class="problem-card">
+                    <div class="problem-icon">🏰</div>
+                    <h3>AI Monopolies</h3>
+                    <p>"Innovation is stifled when a few corporations control the future of intelligence."</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⚙️</div>
+                    <h3>Black Box Algorithms</h3>
+                    <p>"Unexplainable decisions create mistrust and unaccountable automation."</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🔗</div>
+                    <h3>No Native Economy</h3>
+                    <p>"AI agents cannot truly collaborate, transact, or cooperate at scale."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="architecture">
+        <div class="container">
+            <h2>A Human-First Stack for Decentralized Intelligence</h2>
+            <div class="architecture-stack">
+                <div class="stack-layer" data-layer="4">
+                    <div class="layer-icon">👤</div>
+                    <div class="layer-content">
+                        <h3>Context & Empathy Layer</h3>
+                        <div class="layer-details">
+                            <ul>
+                                <li>Mission Control UI</li>
+                                <li>Emotional Recognition</li>
+                                <li>Conversational Dashboards</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="stack-layer" data-layer="3">
+                    <div class="layer-icon">🤝</div>
+                    <div class="layer-content">
+                        <h3>Marketplace & Economic Protocol</h3>
+                        <div class="layer-details">
+                            <ul>
+                                <li>Agent Discovery</li>
+                                <li>On-Chain Reputation</li>
+                                <li>Transparent Negotiation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="stack-layer" data-layer="2">
+                    <div class="layer-icon">🤖</div>
+                    <div class="layer-content">
+                        <h3>The Agent Network</h3>
+                        <div class="layer-details">
+                            <ul>
+                                <li>Leash-and-Lead Framework</li>
+                                <li>Modular Personalities</li>
+                                <li>Ethical Rulesets</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="stack-layer" data-layer="1">
+                    <div class="layer-icon">⛓️</div>
+                    <div class="layer-content">
+                        <h3>Decentralized Identity & Governance</h3>
+                        <div class="layer-details">
+                            <ul>
+                                <li>Self-Sovereign Identity (SSI)</li>
+                                <li>Governance DAO</li>
+                                <li>Verifiable Credentials</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Case Section -->
+    <section class="use-case">
+        <div class="container">
+            <h2>See the Symbiotic Economy in Action.</h2>
+            <div class="use-case-card">
+                <div class="use-case-profile">
+                    <div class="profile-img">
+                        <div class="profile-img-placeholder">M</div>
+                    </div>
+                    <h4>Maria</h4>
+                    <p>Sustainability Consultant</p>
+                </div>
+                <div class="use-case-content">
+                    <p class="use-case-quote">"My personal agent handles the data orchestration and negotiation, which gives me back time for the strategic, human decisions that matter."</p>
+                    <div class="use-case-visualization">
+                        <!-- This would be a flowchart visualization in a real implementation -->
+                        <p>Visualization showing Maria's AI agent interacting with Research AI, Logistics AI, and Data Streams</p>
+                    </div>
+                    <div class="use-case-cta">
+                        <a href="#" class="btn btn-primary">View More Case Studies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Governance & Tokenomics Section -->
+    <section class="governance-tokenomics-section">
+        <div class="container">
+            <div class="governance-tokenomics">
+                <div class="governance">
+                    <h3>Governed by the Community, Guided by Ethics.</h3>
+                    <p>A multi-tiered DAO ensures KIANAFU remains accountable to human values.</p>
+                    <div class="governance-icons">
+                        <div class="governance-icon">
+                            <div class="icon-circle">👥</div>
+                            <span>Community DAO</span>
+                        </div>
+                        <div class="governance-icon">
+                            <div class="icon-circle">💻</div>
+                            <span>Developer DAO</span>
+                        </div>
+                        <div class="governance-icon">
+                            <div class="icon-circle">⚖️</div>
+                            <span>Ethics Council</span>
+                        </div>
+                    </div>
+                    <div class="governance-cta">
+                        <a href="#" class="btn btn-secondary">Read the Governance Model</a>
+                    </div>
+                </div>
+                <div class="tokenomics">
+                    <h3>Fueling the Symbiotic Economy.</h3>
+                    <p>The KIA token powers transactions, governance, and rewards within the ecosystem.</p>
+                    <div class="tokenomics-roles">
+                        <div class="tokenomics-role">
+                            <div class="icon-circle">💰</div>
+                            <span>Agent Fees</span>
+                        </div>
+                        <div class="tokenomics-role">
+                            <div class="icon-circle">🗳️</div>
+                            <span>Governance Voting</span>
+                        </div>
+                        <div class="tokenomics-role">
+                            <div class="icon-circle">🔒</div>
+                            <span>Staking</span>
+                        </div>
+                        <div class="tokenomics-role">
+                            <div class="icon-circle">🏆</div>
+                            <span>Contributor Rewards</span>
+                        </div>
+                    </div>
+                    <div class="tokenomics-cta">
+                        <a href="#" class="btn btn-primary btn-disabled">Tokenomics Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap">
+        <div class="container">
+            <h2>Building the Future, Step by Step.</h2>
+            <div class="timeline">
+                <div class="timeline-phase">
+                    <div class="phase-marker active">1</div>
+                    <div class="phase-content">
+                        <h4>Genesis (Q4 2024 – Q2 2025)</h4>
+                        <ul>
+                            <li>Core Protocol Launch</li>
+                            <li>Governance Model Live</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-marker">2</div>
+                    <div class="phase-content">
+                        <h4>Nursery (Q3 2025 – Q4 2026)</h4>
+                        <ul>
+                            <li>Beta Agents</li>
+                            <li>Enterprise Pilots</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-marker">3</div>
+                    <div class="phase-content">
+                        <h4>Symbiosis (2027+)</h4>
+                        <ul>
+                            <li>Full Public Launch</li>
+                            <li>Marketplace Activation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Join the Movement. Co-Create the Future.</h2>
+            <p>We invite developers, creators, researchers, and enterprises to build the decentralized intelligent world.</p>
+            <div class="final-cta-buttons">
+                <a href="#" class="btn btn-primary">Join Our Community</a>
+                <a href="#" class="btn btn-secondary">Become a Partner</a>
+                <a href="#" class="btn btn-secondary">Build on KIANAFU</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Interactive Stack Layers
+        document.querySelectorAll('.stack-layer').forEach(layer => {
+            layer.addEventListener('click', function() {
+                // Close all other layers
+                document.querySelectorAll('.stack-layer').forEach(otherLayer => {
+                    if (otherLayer !== this) {
+                        otherLayer.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current layer
+                this.classList.toggle('active');
+            });
+        });
+
+        // Interactive Roadmap
+        document.querySelectorAll('.phase-marker').forEach(marker => {
+            marker.addEventListener('click', function() {
+                // Close all other phases
+                document.querySelectorAll('.phase-marker').forEach(otherMarker => {
+                    otherMarker.classList.remove('active');
+                });
+                
+                // Activate clicked phase
+                this.classList.add('active');
+            });
+        });
+
+        // Simple neural network animation placeholder
+        // In a real implementation, this would be a more sophisticated animation
+        const neuralBg = document.getElementById('neural-network-bg');
+        if (neuralBg) {
+            // This is a placeholder for a neural network animation
+            neuralBg.innerHTML = '<div style="width:100%;height:100%;background:radial-gradient(circle, rgba(0,188,212,0.2) 0%, rgba(26,35,126,0) 70%);"></div>';
+        }
+    </script>
+</body>
+</html>
